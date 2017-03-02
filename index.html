@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html>
+<head>
+<!--:title-->
+	<link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootswatch/3.3.7/slate/bootstrap.min.css"/>
+	<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.9.0/styles/zenburn.min.css"/>
+<!--:style-->
+	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular.min.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.9.0/highlight.min.js"></script>
+<!--:script-->
+<style>
+    /* Required by fixed navbar */
+    body { padding-top: 70px; padding-left: 20px; padding-right: 20px; }
+    .content-viewport { border-left: 1px solid black; }
+    .content-selector { text-align: center; }
+    /* Overrides default labels, too small for this */
+    .marksite .label { font-size: 100%; padding: .2em .6em .1em }
+</style>
+
+<script>
+    hljs.initHighlightingOnLoad();
+    var app = angular.module('marksite',[]);
+</script>
+
+</head>
+<body ng-app="marksite" class="marksite">
+
+    <div> <!-- future controller goes here -->
+        <div>
+            <nav class="navbar navbar-default navbar-fixed-top navbar-inverse">
+                <div class="container-fluid">
+                    <!-- Brand and toggle get grouped for better mobile display -->
+                    <div class="navbar-header">
+                        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                            <span class="sr-only">Toggle navigation</span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                        </button>
+                        <a class="navbar-brand" href="#">Apycazo</a>
+                    </div>
+
+                    <!-- Collect the nav links, forms, and other content for toggling -->
+                    <div class="collapse navbar-collapse">
+                        <ul class="nav navbar-nav">
+                            <li class="active"><a href="#">Home</a></li>
+                            <li><a href="#">Link</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+        </div>
+        <div class="">
+
+            <div class="row">
+                <!-- menu -->
+                <div class="content-selector col-md-2">
+                    <h3>Select entry</h3>
+                    <ul class="list-group">
+                        <button type="button" class="list-group-item">Angular setup</button>
+                        <button type="button" class="list-group-item">Components</button>
+                        <button type="button" class="list-group-item">Examples</button>
+                    </ul>
+                </div>
+                <!-- content -->
+                <div class="content-viewport col-md-10">
+                    <div id="index.md">
+<h1> Test index (marksite style)</h1>
+<hr>
+Italic text uses simple asterisks, like: <i>this is italic text on line 1</i>.  <br>
+Bold text uses double asteriks, like: <strong>this is bold text on line 2</strong>.  <br>
+Striked-through text uses markers, like <strike>this is not right on line 3</strike>.  <br>
+Also, monospaced is between double ticks: <tt>this is robot talking on line 4</tt>.  <br>
+This is some <strong>bold text</strong> and <strong>even more bold, with 1234, and (){}_-</strong>.  <br>
+Also, <span class="label label-danger">labels</span> can be used to <span class="label label-danger">really</span> remark something.  <br>
+Links like <a href="http://apycazo.github.io">my sample page</a> are supported.  <br>
+<br>
+<h2> Line breaks</h2>
+<hr>
+Line breaks are created using two or more spaces.  <br>
+This two lines
+are actually rendered together.  <br>
+<br>
+<h2> Code view</h2>
+This is an example of java code highlighting:  <br>
+<pre><code class="java">
+@Test
+public void checkSessionType ()
+{
+    given()
+            // sends auth info without expecting a requirement for it
+            .auth().preemptive().basic("gandalf", "the-grey")
+            // now the query should go ok
+            .when().get("private/service").then().statusCode(HttpStatus.OK.value());
+
+    when().get("private/service").then().statusCode(HttpStatus.UNAUTHORIZED.value());
+}
+</code></pre>
+<br>
+<h2> Quoting</h2>
+<hr>
+This are some quoting examples:  <br>
+<blockquote> This is a one line quote
+</blockquote><br>
+This should be left out
+<br>
+<blockquote> This is a multiline quote.
+<br> It actually continues!.
+<br> And <strong>by the way</strong>, other markdown <span class="label label-danger">still</span> works!
+</blockquote><br>
+<h2> Lists</h2>
+<hr>
+Unordered list:  <br>
+<ul><li>element 1</li>
+<li>element 2</li>
+<li>element 3</li>
+</ul><br>
+Ordered list:
+<ol><li> element 1</li>
+<li> element 2</li>
+<li> element 3</li>
+</ol><br>
+<h2> Lorem ipsum</h2>
+<hr>
+Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec vehicula risus sapien, ut euismod purus gravida id. Nulla ultricies leo odio, ut euismod augue imperdiet vel. Phasellus quam nisi, elementum dignissim ex sed, ornare semper est. Aliquam luctus risus quis sapien semper, eget rutrum leo bibendum. Donec vel mi at urna posuere porta. Nulla tristique pharetra ex at congue. Nunc non vehicula orci. Donec dignissim arcu commodo eros consectetur commodo.
+<br>
+<h1> Header L1</h1>
+<h2> Header L2</h2>
+<h3> Header L3</h3>
+<h4> Header L4</h4>
+<br>
+</div>
+
+                    <!--:content-->
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

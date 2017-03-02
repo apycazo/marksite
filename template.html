@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+<head>
+<!--:title-->
+<!--:style-->
+<!--:script-->
+<style>
+    /* Required by fixed navbar */
+    body { padding-top: 70px; padding-left: 20px; padding-right: 20px; }
+    .content-viewport { border-left: 1px solid black; }
+    .content-selector { text-align: center; }
+    /* Overrides default labels, too small for this */
+    .marksite .label { font-size: 100%; padding: .2em .6em .1em }
+</style>
+
+<script>
+    hljs.initHighlightingOnLoad();
+    var app = angular.module('marksite',[]);
+</script>
+
+</head>
+<body ng-app="marksite" class="marksite">
+
+    <div> <!-- future controller goes here -->
+        <div>
+            <nav class="navbar navbar-default navbar-fixed-top navbar-inverse">
+                <div class="container-fluid">
+                    <!-- Brand and toggle get grouped for better mobile display -->
+                    <div class="navbar-header">
+                        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                            <span class="sr-only">Toggle navigation</span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                        </button>
+                        <a class="navbar-brand" href="#"><!--:brand--></a>
+                    </div>
+
+                    <!-- Collect the nav links, forms, and other content for toggling -->
+                    <div class="collapse navbar-collapse">
+                        <ul class="nav navbar-nav">
+                            <li class="active"><a href="#">Home</a></li>
+                            <li><a href="#">Link</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+        </div>
+        <div class="">
+
+            <div class="row">
+                <!-- menu -->
+                <div class="content-selector col-md-2">
+                    <h3>Select entry</h3>
+                    <ul class="list-group">
+                        <button type="button" class="list-group-item">Angular setup</button>
+                        <button type="button" class="list-group-item">Components</button>
+                        <button type="button" class="list-group-item">Examples</button>
+                    </ul>
+                </div>
+                <!-- content -->
+                <div class="content-viewport col-md-10">
+                    <!--:index-->
+
+                    <!--:content-->
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
