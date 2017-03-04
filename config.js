@@ -1,9 +1,8 @@
 module.exports = {
     target: './index.html',
-    source: './pages',
-    title: 'Apycazo GitHub page',
+    title: 'Andres Picazo -- GitHub site',
     brand: 'Apycazo',
-    index: './index.md',
+    index: 'index.md',
     scripts: [
         'https://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular.min.js',
         'https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js',
@@ -11,8 +10,23 @@ module.exports = {
         'https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.9.0/highlight.min.js'
     ],
     styles: [
-        // 'https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css',
         'https://maxcdn.bootstrapcdn.com/bootswatch/3.3.7/slate/bootstrap.min.css',
         'https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.9.0/styles/zenburn.min.css'
+    ],
+    menu: [
+        {
+            title: 'Home 2',
+            pages: [
+                { title: 'Test', src: 'pages/test.md' },
+                { title: 'Stub 1', src: 'pages/stub-1.md' }
+            ]
+        },
+        {
+            title: 'About',
+            pages: [
+                { title: 'Stub 1', src: 'pages/stub-1.md' },
+                { title: 'Stub 2', src: 'pages/stub-2.md' }
+            ]
+        }
     ]
 }

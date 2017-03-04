@@ -15,13 +15,15 @@
 
 <script>
     hljs.initHighlightingOnLoad();
-    var app = angular.module('marksite',[]);
+    angular.module('marksite',[]).controller('marksite-controller', ['$rootScope','$scope', function ($root, $scope) {
+        $root.bookmark = { chapter: 0, page: 0 };
+    }]);
 </script>
 
 </head>
 <body ng-app="marksite" class="marksite">
 
-    <div> <!-- future controller goes here -->
+    <div ng-controller="marksite-controller"> <!-- future controller goes here -->
         <div>
             <nav class="navbar navbar-default navbar-fixed-top navbar-inverse">
                 <div class="container-fluid">
@@ -33,14 +35,13 @@
                             <span class="icon-bar"></span>
                             <span class="icon-bar"></span>
                         </button>
-                        <a class="navbar-brand" href="#"><!--:brand--></a>
+                        <a class="navbar-brand" href="#" ng-click="$root.bookmark.chapter=0;$root.bookmark.page=0"><!--:brand--></a>
                     </div>
 
                     <!-- Collect the nav links, forms, and other content for toggling -->
                     <div class="collapse navbar-collapse">
                         <ul class="nav navbar-nav">
-                            <li class="active"><a href="#">Home</a></li>
-                            <li><a href="#">Link</a></li>
+                            <!--:navbar-items-->
                         </ul>
                     </div>
                 </div>
@@ -49,21 +50,9 @@
         <div class="">
 
             <div class="row">
-                <!-- menu -->
-                <div class="content-selector col-md-2">
-                    <h3>Select entry</h3>
-                    <ul class="list-group">
-                        <button type="button" class="list-group-item">Angular setup</button>
-                        <button type="button" class="list-group-item">Components</button>
-                        <button type="button" class="list-group-item">Examples</button>
-                    </ul>
-                </div>
-                <!-- content -->
-                <div class="content-viewport col-md-10">
-                    <!--:index-->
-
-                    <!--:content-->
-                </div>
+                <!--:content-selector-->
+                <!--:index-->
+                <!--:content-->
             </div>
         </div>
     </div>

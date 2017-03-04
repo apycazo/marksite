@@ -24,7 +24,7 @@ var fsp        = bluebird.promisifyAll(fs);
 // Page parser
 // -----------------------------------------------------------------------------
 
-function mdParser (name, page)
+function mdParser (source, chapter=0, page=0, columns=10)
 {
     status = [];
 
@@ -63,7 +63,11 @@ function mdParser (name, page)
             + (line.endsWith('  ') ? '<br>':'');
     }
 
-    return `<div id="${name}">\n` + page
+    var style = `class="content-viewport col-md-${columns}"`;
+    var showIf = `$root.bookmark.chapter==${chapter} && $root.bookmark.page==${page}`;
+
+    return `<div ${style} ng-show="${showIf}">\n` +
+        source
         .split('\n')
         .map(function (line, index, all) {
             // start/end highlight code
@@ -140,14 +144,46 @@ function mdParser (name, page)
         .join('\n') + '\n</div>';
 }
 
+function generateNavbar (config)
+{
+    var menuIndex = 1;
+    var pageIndex = 0;
+    var navbarItems = '';
+    config.menu.forEach(menu => {
+        navbarItems +=
+            `<li>
+                <a href="#" ng-click="$root.bookmark.chapter=${menuIndex};$root.bookmark.page=0">${menu.title}</a>
+            </li>`;
+        menuIndex++;
+    });
+    return navbarItems;
+}
+
+function generatePageSelector (pages, menuIndex, columns=2)
+{
+    var options = pages.map(function (page, index) {
+        action = `$root.bookmark.chapter=${menuIndex}; $root.bookmark.page=${index}`;
+        return `
+            <a href="#" ng-class="{'list-group-item':true, active:$root.bookmark.page==${index}}" ng-click="${action}" >
+                ${page.title}
+            </a>`;
+    }).join('\n');
+
+    return `
+        <div class="content-selector col-md-${columns}" ng-show="$root.bookmark.chapter==${menuIndex}">
+            <h3>Select entry</h3>
+            <ul class="list-group">
+                ${options}
+            </ul>
+        </div>\n<!--:content-selector-->`;
+}
 // -----------------------------------------------------------------------------
 // Site builder
 // -----------------------------------------------------------------------------
 
-function buildSite (config, index, pages)
+(buildSite = function  ()
 {
     var template = fs.readFileSync('./template.html', 'utf8');
-    var index = fs.readFileSync('./index.md', 'utf8');
     // --- config title
     site = template.replace('<!--:title-->', `\t<title>${config.title || 'Marksite!'}</title>`);
     // --- navbar brand
@@ -160,27 +196,39 @@ function buildSite (config, index, pages)
     (config.styles || []).forEach(style => {
         site = site.replace('<!--:style-->', `\t<link rel="stylesheet" type="text/css" href="${style}"/>\n<!--:style-->`);
     });
+    // --- generate the navbar
+    site = site.replace('<!--:navbar-items-->', generateNavbar(config));
+    // --- start generating chapters
+    var menuIndex = 0;
     // --- replace index
-    site = site.replace('<!--:index-->', mdParser('index.md', index));
+    site = site.replace('<!--:index-->', mdParser(fs.readFileSync(config.index, 'utf8'), menuIndex++, 0, 12));
+    // iterate over the other menus
+    config.menu.forEach(chapter => {
+        if (chapter.pages.length > 1) site = site.replace('<!--:content-selector-->', generatePageSelector(chapter.pages, menuIndex, 2));
+        var content = chapter.pages.map(function (page, pageIndex) {
+            return mdParser(fs.readFileSync(page.src, 'utf8'), menuIndex, pageIndex);
+        }).join('\n');
+        site = site.replace('<!--:content-->', content +'\n<!--:content-->');
+        menuIndex++;
+    });
     // log & save file
-    // console.log(site);
     fs.writeFileSync(config.target, site, 'utf8');
-}
+})();
 
 // -----------------------------------------------------------------------------
 // Build the pages
 // -----------------------------------------------------------------------------
 
 // simple way
-var pages = {};
-fsp
-    .readdirAsync(config.source)
-    .filter(file => file.endsWith('.md'))
-    .map(function (filename) {
-        pages[filename] = null;
-        return fsp.readFileAsync(config.source + "/" + filename, "utf8");
-    })
-    .then(function (data) {
-        Object.keys(pages).forEach(function (k,i) { pages[k] = data[i] });
-        buildSite(config, pages);
-    });
+// var pages = {};
+// fsp
+//     .readdirAsync(config.source)
+//     .filter(file => file.endsWith('.md'))
+//     .map(function (filename) {
+//         pages[filename] = null;
+//         return fsp.readFileAsync(config.source + "/" + filename, "utf8");
+//     })
+//     .then(function (data) {
+//         Object.keys(pages).forEach(function (k,i) { pages[k] = data[i] });
+//         buildSite(config, pages);
+//     });
