@@ -13,8 +13,8 @@
 <style>
     /* Required by fixed navbar */
     body { padding-top: 70px; padding-left: 20px; padding-right: 20px; }
-    .content-viewport { border-left: 1px solid black; }
-    .content-selector { text-align: center; }
+    /*.content-viewport { border-left: 1px solid black; }*/
+    .content-selector { text-align: center; border-right: 2px solid black; }
     /* Overrides default labels, too small for this */
     .marksite .label { font-size: 100%; padding: .2em .6em .1em }
 </style>
@@ -41,7 +41,7 @@
                             <span class="icon-bar"></span>
                             <span class="icon-bar"></span>
                         </button>
-                        <a class="navbar-brand" href="#" ng-click="$root.bookmark.chapter=0;$root.bookmark.page=0">Apycazo</a>
+                        <a class="navbar-brand" href="#" ng-click="$root.bookmark.chapter=0;$root.bookmark.page=0">Home</a>
                     </div>
 
                     <!-- Collect the nav links, forms, and other content for toggling -->
@@ -57,12 +57,11 @@
                 </div>
             </nav>
         </div>
-        <div class="">
-
-            <div class="row">
+        <div class="row">
+            <div class="col-md-11 col-md-offset-1">
                 
         <div class="content-selector col-md-2" ng-show="$root.bookmark.chapter==1">
-            <h3>Select entry</h3>
+            <h1>Page select</h1><hr>
             <ul class="list-group">
                 
             <a href="#" ng-class="{'list-group-item':true, active:$root.bookmark.page==0}" ng-click="$root.bookmark.chapter=1; $root.bookmark.page=0" >
@@ -76,7 +75,7 @@
         </div>
 
         <div class="content-selector col-md-2" ng-show="$root.bookmark.chapter==2">
-            <h3>Select entry</h3>
+            <h1>Page select</h1><hr>
             <ul class="list-group">
                 
             <a href="#" ng-class="{'list-group-item':true, active:$root.bookmark.page==0}" ng-click="$root.bookmark.chapter=2; $root.bookmark.page=0" >
@@ -89,7 +88,7 @@
             </ul>
         </div>
 <!--:content-selector-->
-                <div class="content-viewport col-md-12" ng-show="$root.bookmark.chapter==0 && $root.bookmark.page==0">
+                <div class="content-viewport col-md-11" ng-show="$root.bookmark.chapter==0 && $root.bookmark.page==0">
 <h1> Test index (marksite style)</h1>
 <hr>
 Italic text uses simple asterisks, like: <i>this is italic text on line 1</i>.  <br>
@@ -155,25 +154,25 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec vehicula risus sa
 <h4> Header L4</h4>
 <br>
 </div>
-                <div class="content-viewport col-md-10" ng-show="$root.bookmark.chapter==1 && $root.bookmark.page==0">
+                <div class="content-viewport col-md-9" ng-show="$root.bookmark.chapter==1 && $root.bookmark.page==0">
 <h1> Test page</h1>
 <hr>
 This page is a mere stub for future usage.
 <br>
 </div>
-<div class="content-viewport col-md-10" ng-show="$root.bookmark.chapter==1 && $root.bookmark.page==1">
+<div class="content-viewport col-md-9" ng-show="$root.bookmark.chapter==1 && $root.bookmark.page==1">
 <h1> This is the stub 1</h1>
 <hr>
 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras quis aliquet ipsum, vitae tempus est. Ut tincidunt, arcu nec pharetra ullamcorper, dui sem vestibulum lacus, eget mollis orci turpis non massa. Proin lacinia lobortis suscipit.
 <br>
 </div>
-<div class="content-viewport col-md-10" ng-show="$root.bookmark.chapter==2 && $root.bookmark.page==0">
+<div class="content-viewport col-md-9" ng-show="$root.bookmark.chapter==2 && $root.bookmark.page==0">
 <h1> This is the stub 1</h1>
 <hr>
 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras quis aliquet ipsum, vitae tempus est. Ut tincidunt, arcu nec pharetra ullamcorper, dui sem vestibulum lacus, eget mollis orci turpis non massa. Proin lacinia lobortis suscipit.
 <br>
 </div>
-<div class="content-viewport col-md-10" ng-show="$root.bookmark.chapter==2 && $root.bookmark.page==1">
+<div class="content-viewport col-md-9" ng-show="$root.bookmark.chapter==2 && $root.bookmark.page==1">
 <h1> This is the stub 2</h1>
 <hr>
 Vestibulum malesuada ultrices turpis vitae auctor. Vivamus eget purus venenatis, rhoncus metus at, tempus libero. Sed in libero congue, elementum diam ut, faucibus ex. Aenean eget ullamcorper leo. Mauris mattis metus ullamcorper vehicula tempor. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas.

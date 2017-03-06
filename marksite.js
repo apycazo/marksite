@@ -8,23 +8,20 @@ TODO List:
 */
 // =============================================================================
 
-
 // -----------------------------------------------------------------------------
 // Imports
 // -----------------------------------------------------------------------------
 
-var config     = require('./config.js');
 const fs       = require('fs');
 // const walk     = require('walk');
-const os       = require('os');
-const bluebird = require('bluebird');
-var fsp        = bluebird.promisifyAll(fs);
+// const bluebird = require('bluebird');
+// var fsp        = bluebird.promisifyAll(fs);
 
 // -----------------------------------------------------------------------------
 // Page parser
 // -----------------------------------------------------------------------------
 
-function mdParser (source, chapter=0, page=0, columns=10)
+function mdParser (source, chapter=0, page=0, columns=9)
 {
     status = [];
 
@@ -169,9 +166,11 @@ function generatePageSelector (pages, menuIndex, columns=2)
             </a>`;
     }).join('\n');
 
+    var header = `<h1>Page select</h1><hr>`;
+
     return `
         <div class="content-selector col-md-${columns}" ng-show="$root.bookmark.chapter==${menuIndex}">
-            <h3>Select entry</h3>
+            ${header}
             <ul class="list-group">
                 ${options}
             </ul>
@@ -183,6 +182,7 @@ function generatePageSelector (pages, menuIndex, columns=2)
 
 (buildSite = function  ()
 {
+    var config = JSON.parse(fs.readFileSync(process.argv[2] || './config.json', 'utf8'));
     var template = fs.readFileSync('./template.html', 'utf8');
     // --- config title
     site = template.replace('<!--:title-->', `\t<title>${config.title || 'Marksite!'}</title>`);
@@ -201,7 +201,7 @@ function generatePageSelector (pages, menuIndex, columns=2)
     // --- start generating chapters
     var menuIndex = 0;
     // --- replace index
-    site = site.replace('<!--:index-->', mdParser(fs.readFileSync(config.index, 'utf8'), menuIndex++, 0, 12));
+    site = site.replace('<!--:index-->', mdParser(fs.readFileSync(config.index, 'utf8'), menuIndex++, 0, 11));
     // iterate over the other menus
     config.menu.forEach(chapter => {
         if (chapter.pages.length > 1) site = site.replace('<!--:content-selector-->', generatePageSelector(chapter.pages, menuIndex, 2));
