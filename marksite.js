@@ -1,10 +1,7 @@
 // =============================================================================
 /* MarkSite
 @author Andres Picazo
-TODO List:
-    - Blocks inside other blocks (change array to json?)
-    - Nested lists
-    - Image linking
+Use: https://www.npmjs.com/package/marked
 */
 // =============================================================================
 
