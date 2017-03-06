@@ -76,7 +76,8 @@ function mdParser (source, chapter=0, page=0, columns=9)
                 else {
                     setBlock('code');
                     lang = line.substr(3);
-                    return lang === '' ? '<pre><code>' : `<pre><code class="${lang}">`
+                    if (lang === 'xml') return `<pre><code class="no-highlight">`;
+                    else return lang === '' ? '<pre><code>' : `<pre><code class="${lang}">`
                 }
                 status = 'code';
             }
@@ -111,7 +112,7 @@ function mdParser (source, chapter=0, page=0, columns=9)
                 }
             }
             // a line with only two spaces is a new paragraph
-            else if (line === '  ' || line === '') {
+            else if (line === '  ' || line === '' || line.length === 0) {
                 // unsets any current block
                 closure = '';
                 switch(unsetBlock() || '') {
@@ -127,7 +128,7 @@ function mdParser (source, chapter=0, page=0, columns=9)
                     default:
                         closure = '';
                 }
-                return closure + '<br>';
+                return closure + '<br><br>';
             }
             // three dashes is an horizontal line
             else if (line === '---' || line === '===') {
@@ -183,11 +184,15 @@ function generatePageSelector (pages, menuIndex, columns=2)
 (buildSite = function  ()
 {
     var config = JSON.parse(fs.readFileSync(process.argv[2] || './config.json', 'utf8'));
-    var template = fs.readFileSync('./template.html', 'utf8');
+    var site = fs.readFileSync('./template.html', 'utf8');
+    if (config.favicon && config.favicon.length > 0) {
+        site = site.replace('<!--:favicon-->', `<link rel="icon" href="${config.favicon}">`);
+        // https://icons.better-idea.org/icon?size=80..120..200&url=github.com
+    }
     // --- config title
-    site = template.replace('<!--:title-->', `\t<title>${config.title || 'Marksite!'}</title>`);
+    site = site.replace('<!--:title-->', `\t<title>${config.title || 'Marksite!'}</title>`);
     // --- navbar brand
-    site = template.replace('<!--:brand-->', config.brand || 'Marksite!');
+    site = site.replace('<!--:brand-->', config.brand || 'Marksite!');
     // --- add scripts
     (config.scripts || []).forEach(script => {
         site = site.replace('<!--:script-->', `\t<script src="${script}"></script>\n<!--:script-->`);
