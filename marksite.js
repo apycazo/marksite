@@ -11,7 +11,7 @@ function expandName (name)
     return (name.charAt(0).toUpperCase() + name.slice(1)).replace('-', ' ');
 }
 
-function createPageSelector (pages, chapterNumber, columns=3)
+function createPageSelector (pages, chapterNumber, columns=2)
 {
     var options = pages.map(function (page, index) {
         action = `$root.bookmark.chapter=${chapterNumber}; $root.bookmark.page=${index}`;
