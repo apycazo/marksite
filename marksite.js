@@ -12,6 +12,7 @@ var template = `<!DOCTYPE html>
     .content-selector { text-align: center; padding-top: 20px; }
     .marksite code { padding: 4px 4px; }
     .marksite pre { padding: 0px; }
+    .marksite hr { border-top: 1px solid #ffffff; }
     .footer { background-color: #697075; min-height: 50px; line-height: 50px; text-align: center; margin-top:25px }
     th, td { padding: 5px; border:1px solid black; }
 </style>
