@@ -1,10 +1,9 @@
 {
     "title": "GitHub site [Andres Picazo]",
-    "template": "default-template.html",
     "target": "site.html",
     "brand": "Andrew's GitHub",
     "home": "http://apycazo.github.io",
-    "source": "pages/",
+    "source": "./pages/",
     "favicon": "https://icons.better-idea.org/icon?size=80..120..200&url=github.com",
     "scripts": [
         "https://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular.min.js",
@@ -17,7 +16,7 @@
         "https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.9.0/styles/zenburn.min.css"
     ],
     "chapters": {
-        "home": ["pages/index.md"],
-        "test": ["pages/stub-1.md", "pages/stub-2.md", "pages/test.md"]
+        "home": ["index.md"],
+        "test": ["stub-1.md", "stub-2.md", "test.md"]
     }
 }

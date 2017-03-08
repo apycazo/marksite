@@ -1,9 +1,13 @@
 {
-  "name": "marksite",
-  "version": "0.2.0",
-  "private": true,
-  "dependencies": {
-    "fs": "0.0.1-security",
-    "marked": "^0.3.6"
-  }
+    "name": "marksite",
+    "version": "0.2.3",
+    "private": true,
+    "dependencies": {
+        "fs": "0.0.1-security",
+        "marked": "^0.3.6"
+    },
+    "files": ["marksite.js", "LICENSE.md"],
+    "bin": {
+        "marksite": "./marksite.js"
+    }
 }
